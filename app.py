@@ -421,7 +421,7 @@ if page == "Single Prediction":
         <div class="metric-card">
             <div class="metric-label">Tax Gap</div>
             <div class="metric-value" style="color:{'#f87171' if tax_gap > 0 else '#4ade80'}">
-                ${tax_gap:,.0f}
+                E{tax_gap:,.0f}
             </div>
         </div>
         """, unsafe_allow_html=True)
