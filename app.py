@@ -399,20 +399,20 @@ if page == "Single Prediction":
         industries = list(artifacts["industry_encoder"].classes_) if artifacts.get("industry_encoder") else ["Retail", "Finance", "Manufacturing", "Technology", "Healthcare"]
         industry = st.selectbox("Industry", industries)
 
-        revenue  = st.number_input("Revenue ($)", min_value=0.0, value=850000.0, step=10000.0, format="%.2f")
-        expenses = st.number_input("Expenses ($)", min_value=0.0, value=590000.0, step=10000.0, format="%.2f")
+        revenue  = st.number_input("Revenue (E)", min_value=0.0, value=850000.0, step=10000.0, format="%.2f")
+        expenses = st.number_input("Expenses (E)", min_value=0.0, value=590000.0, step=10000.0, format="%.2f")
         profit   = revenue - expenses
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Calculated Profit</div>
-            <div class="metric-value">${profit:,.0f}</div>
+            <div class="metric-value">E{profit:,.0f}</div>
         </div>
         """, unsafe_allow_html=True)
 
     with col_r:
         st.markdown("**Tax & Compliance**")
-        tax_liability = st.number_input("Tax Liability ($)", min_value=0.0, value=85000.0, step=1000.0, format="%.2f")
-        tax_paid      = st.number_input("Tax Paid ($)",      min_value=0.0, value=68000.0, step=1000.0, format="%.2f")
+        tax_liability = st.number_input("Tax Liability (E)", min_value=0.0, value=85000.0, step=1000.0, format="%.2f")
+        tax_paid      = st.number_input("Tax Paid (E)",      min_value=0.0, value=68000.0, step=1000.0, format="%.2f")
 
         tax_gap   = tax_liability - tax_paid
         pay_ratio = tax_paid / (tax_liability + 1) * 100
@@ -479,7 +479,7 @@ if page == "Single Prediction":
         st.markdown('<div class="section-title">Key Risk Indicators</div>', unsafe_allow_html=True)
         m1, m2, m3, m4 = st.columns(4)
         with m1:
-            st.metric("Tax Gap", f"${tax_gap:,.0f}", delta="Underpaid" if tax_gap > 0 else "Overpaid",
+            st.metric("Tax Gap", f"E{tax_gap:,.0f}", delta="Underpaid" if tax_gap > 0 else "Overpaid",
                       delta_color="inverse" if tax_gap > 0 else "normal")
         with m2:
             st.metric("Payment Ratio", f"{pay_ratio:.1f}%", delta="Below threshold" if pay_ratio < 90 else "Compliant",
